@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -24,8 +15,8 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.coffeeService.findOne('' + id);
+  findOne(@Param('id') id: number) {
+    return this.coffeeService.findOne(id);
   }
 
   @Post()
@@ -40,7 +31,7 @@ export class CoffeesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.coffeeService.remove(id);
   }
 }
