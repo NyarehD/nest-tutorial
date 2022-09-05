@@ -18,7 +18,8 @@ export class CoffeesService {
 
   async findOne(id: string) {
     console.log(typeof id);
-    const coffee=await this.coffeeRepository.findOne(id)
+    let coffee;
+    // const coffee=await this.coffeeRepository.findOne(id)
     if (!coffee) {
       throw new NotFoundException(`Coffee #${id} not found`);
     }
