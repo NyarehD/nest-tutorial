@@ -5,8 +5,6 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
 import { LaptopsModule } from './laptops/laptops.module';
-import { StudentsModule } from './students/students.module';
-import { CountriesModule } from './countries/countries.module';
 
 @Module({
   imports: [CoffeesModule, CatsModule, LaptopsModule, TypeOrmModule.forRoot({
@@ -19,7 +17,7 @@ import { CountriesModule } from './countries/countries.module';
     autoLoadEntities: true,
     // Disable this in production
     synchronize: true,
-  }), StudentsModule, CountriesModule],
+  })],
   controllers: [AppController],
   providers: [AppService],
 })
