@@ -12,7 +12,9 @@ export class Student {
   @Column()
   age: number;
 
-  @ManyToOne(() => Country, country => country.students)
+  @ManyToOne(() => Country, country => country.students, {
+    cascade: true,
+  })
   country: Country;
 }
 

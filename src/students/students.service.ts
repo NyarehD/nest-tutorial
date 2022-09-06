@@ -16,16 +16,28 @@ export class StudentsService {
   ) {
   }
 
-  create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
+  async create(createStudentDto: CreateStudentDto) {
+    const country = await this.preloadCountryByName(createStudentDto.country);
+    const student = this.studentRepository.create({
+      ...createStudentDto,
+      country,
+    });
+    return this.studentRepository.save(student);
   }
 
+  async preloadCountryByName(name: string): Promise<Country> {
+    const existingCountry = await this.countryRepository.findOne({ where: { name } });
+    // Beware of the entry to create method
+    if (!existingCountry) return this.countryRepository.create({ name });
+    return existingCountry;
+  };
+
   findAll() {
-    return this.studentRepository.find({ relations: ['country'] });
+    return this.studentRepository.find({ relations: ['country'], order: { id: 'asc' } });
   }
 
   countryWithStudents() {
-    return this.countryRepository.find({ relations: ['students'] });
+    return this.countryRepository.find({ relations: ['students'], order: { id: 'ASC' } });
   }
 
   findOne(id: number) {
