@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
 import { LaptopsModule } from './laptops/laptops.module';
 import { StudentsModule } from './students/students.module';
+import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 
 @Module({
   imports: [CoffeesModule, CatsModule, LaptopsModule, TypeOrmModule.forRoot({
@@ -17,7 +18,7 @@ import { StudentsModule } from './students/students.module';
     database: 'piratednest',
     autoLoadEntities: true,
     synchronize: true,
-  }), StudentsModule],
+  }), StudentsModule, CoffeeRatingModule],
   controllers: [AppController],
   providers: [AppService],
 })
