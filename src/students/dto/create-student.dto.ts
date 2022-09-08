@@ -1,12 +1,17 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateStudentDto {
   @IsString()
-  name: string;
+  public readonly name: string;
 
   @IsNumber()
-  age: number;
+  @IsOptional()
+  public readonly age?: number;
 
   @IsString()
-  country: string;
+  public readonly country: string;
+
+  @IsEmail()
+  @IsOptional()
+  public readonly email?: string;
 }
