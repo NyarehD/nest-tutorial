@@ -1,11 +1,9 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { Country } from './country.entity';
+import { Content } from './content.entity';
 
 @Entity()
-export class Student {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Student extends Content {
   @Column()
   name: string;
 
@@ -19,12 +17,6 @@ export class Student {
     cascade: true,
   })
   country: Country;
-
-  @CreateDateColumn()
-  createdDate: Date;
-
-  @UpdateDateColumn()
-  updatedDate: Date;
 }
 
 

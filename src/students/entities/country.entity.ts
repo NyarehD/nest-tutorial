@@ -1,11 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Student } from './student.entity';
+import { Content } from './content.entity';
 
 @Entity()
-export class Country {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Country extends Content {
   @Column()
   name: string;
 
