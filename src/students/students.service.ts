@@ -26,7 +26,7 @@ export class StudentsService {
   }
 
   async preloadCountryByName(name: string): Promise<Country> {
-    const existingCountry = await this.countryRepository.findOne({ where: { name } });
+    const existingCountry = await this.countryRepository.findOneOrFail({ where: { name } });
     // Beware of the entry to create method
     if (!existingCountry) return this.countryRepository.create({ name });
     return existingCountry;
@@ -44,11 +44,17 @@ export class StudentsService {
     return `This action returns a #${id} student findOne`;
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student update`;
+  async update(id: number, updateStudentDto: UpdateStudentDto) {
+    const country = await this.preloadCountryByName(updateStudentDto.country);
+    return await this.studentRepository.update({ id }, {
+      name: updateStudentDto.name,
+      email: updateStudentDto.email,
+      age: updateStudentDto.age,
+      country,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} student remove `;
+    return this.studentRepository.delete(id);
   }
 }
